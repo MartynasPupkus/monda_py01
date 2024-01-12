@@ -15,7 +15,9 @@ class Product:
 
 class Recipe:
     ingredients = []
-    instructions = []
+    
+    def __init__(self) -> None:
+        self.ingredients = []
 
     def add_ingredient(self, product:Product):
         self.ingredients.append(product)
