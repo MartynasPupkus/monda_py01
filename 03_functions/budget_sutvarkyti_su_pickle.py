@@ -11,6 +11,18 @@ Reikalavimai
 * Suskaičiuoti biudžeto balansą
 
 """
+
+import os 
+import pickle
+
+BUDGET_FILE = 'budget.pickle'
+
+if os.path.exists(BUDGET_FILE):
+    with open(BUDGET_FILE, 'rb') as file:
+        transactions = pickle.load(file) #cia susitvarkyti pagal save
+else:
+    transactions = {}
+
 def add_income(income, amount, income_type):
     income += amount
     print(f"Income added: {amount} ({income_type})")
@@ -54,6 +66,8 @@ while True:
         print("\nIncome Types:", income_types, income)
         print("Expense Types:", expense_types, expenses)
     elif choice == '4':
+        with open(BUDGET_FILE, 'wb') as file:
+            pickle.dump(transactions, file)
         print("Exiting the budget calculator. Goodbye!")
         break
     else:

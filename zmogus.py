@@ -1,5 +1,6 @@
 import pickle
-import os 
+import os
+import pdb
 
 class Zmogus:
     def __init__(self, vardas, amzius):
@@ -8,13 +9,30 @@ class Zmogus:
 
     def __str__(self):
         return f"{self.vardas}, {self.amzius} metų"
-    
+
+
+class AgeError(ValueError):
+    pass
+
+
+if __name__ == '__main__':
+    try:
+        vardas = input('vardas:  ')
+        amzius = int(input('metai:  '))
+        if amzius > 100:
+            raise ValueError('zmones tiek negyvena')
+        if amzius < 0:
+            raise ValueError('zmogus mire negimes')
+    except Exception as error:
+        print(f'klaida {error.__class__.__name__}: {error}')
+        exit()
+
 zmogus = Zmogus(
     input('vardas:  '),
     int(input('metai  ')),
 )
 
-ZMONES_FILE = '08_working_with_files'
+ZMONES_FILE = 'MONDA_PY01'
 
 if os.path.exists(ZMONES_FILE):
     with open(ZMONES_FILE, 'rb') as zmones_file:
